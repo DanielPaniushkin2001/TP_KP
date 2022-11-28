@@ -1,0 +1,66 @@
+﻿@model IEnumerable<StudentControlApp.Models.StudentSubject>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Экзамены</h1>
+@{
+    var check = (int)ViewData["DisplayCheck"];
+}
+            @if (check == 1)
+            {
+                <p>
+                    <a asp-action="Create">Create New</a>
+                </p>
+            }
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+                        @if (check == 1)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentdataId)
+                </th>
+                <th></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+                @if (check == 1)
+                {
+            <td>
+                @Html.DisplayFor(modelItem => item.Studentdata.Name)
+            </td>
+                <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Изменить оценку</a> 
+               </td>
+            }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("Администратор"))
+                    {
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Удалить экзамен</a> |
+                        </td>
+                    }
+                }
+        </tr>
+}
+    </tbody>
+</table>

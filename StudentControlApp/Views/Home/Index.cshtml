@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Система учета знаний учащихся</h1>
+    <p>
+        @Html.ActionLink("Студенты","Index","Student")
+    </p>
+    <p>
+        @Html.ActionLink("Преподаватели","Index","TeacherDatas")
+    </p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            @Html.ActionLink("Экзамены","Index","StudentSubjects")
+        </p>
+        <p>
+            @Html.ActionLink("Справочник предметов","Index","Disciplines")
+        </p>
+        <p>
+            @Html.ActionLink("Группы","Index","Groups")
+        </p>
+    }
+</div>
